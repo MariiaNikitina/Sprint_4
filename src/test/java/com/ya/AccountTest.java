@@ -1,4 +1,5 @@
 package com.ya;
+import io.qameta.allure.Description;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -17,15 +18,18 @@ public class AccountTest {
       return new Object[][] {
               { "name surname", true},
               { "namesurname", false},
-              { " namesurname", false},
-              { "namesurname ", false},
+              { " name surname", false},
+              { "name surname ", false},
               { "na", false},
               { "nnnnnnnnnnnnnnnnnnnn", false},
-              { "namesu  rname", false},
+              { "name  surname", false},
       };
    }
    @Test
    @DisplayName("Check the name with different parameters")
+   @Description("Check how checkNameToEmboss works with 1.correct string,2. string without space," +
+           "3. string with space before name, 4. String with space after surname, " +
+           "5. String with too small name, 6. string with too long name, 7.string with double space")
    public void checkNameToEmbossReturnsCorrectValues() {
       Account account = new Account(name);
       boolean actual = account.checkNameToEmboss();
